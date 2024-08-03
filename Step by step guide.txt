@@ -1,0 +1,26 @@
+THIS IS A STEP BY STEP guide in case you are failing to connect to the database.
+
+- With the assumption that a local server is installed and accessible on you host computer (XAMMP)
+- Start the apache and mysql on your local server
+- Download the code from https://github.com/Elly28/roomraccoon.git
+- Navigate to C:\xampp\htdocs\
+- Unzip the code in local C:\xampp\htdocs\room_raccoon
+- Open the db.php file located in the room_raccoon folder
+- Uncomment the local host credentials for the database
+- Comment out the server credentials
+- With the assumption that a database manager application is installed on your machine (recommend using HeidiSQL which can be downloaded at https://www.heidisql.com/download.php)
+- Connect to the database using localhost credentials (usually username= root, password = '')
+- Run the below command 
+
+CREATE DATABASE room_raccoon;
+
+USE room_raccoon;
+
+CREATE TABLE items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    checked BOOLEAN NOT NULL DEFAULT 0
+);
+
+- After running the above command, go to browser and visit the url http://localhost/room_raccoon/
+- This step by step guide should present to you a screen with the Shopping List functionality ready. 
