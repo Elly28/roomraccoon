@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping List</title>
+    <title>Room Raccoon Shopping List</title>
     <link rel="stylesheet" href="/room_raccoon/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="/room_raccoon/js/scripts.js"></script> -->
 </head>
 
 <body>
     <div class="container">
-        <h1>Shopping List</h1>
+        <h1>Room Raccoon Shopping List</h1>
         <form id="item-form">
             <input type="text" id="item-name" placeholder="Add new item" required>
             <button type="submit">Add</button>
@@ -27,7 +28,7 @@
             <?php endforeach; ?>
         </ul>
     </div>
-
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const itemForm = document.getElementById('item-form');
@@ -40,6 +41,9 @@
                 if (itemName !== '') {
                     fetch('/room_raccoon/index.php?action=create', {
                         method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
                         body: `name=${itemName}`
                     }).then(() => location.reload());
                 }
@@ -51,22 +55,28 @@
                 const id = li.dataset.id;
 
                 if (target.classList.contains('delete-button')) {
-                    fetch('/room_raccoon/index.php?action=delete&id=${id}', {
+                    fetch(`/room_raccoon/index.php?action=delete&id=${id}`, {
                         method: 'POST'
                     }).then(() => location.reload());
                 } else if (target.classList.contains('edit-button')) {
                     const itemName = li.querySelector('.item-name').textContent;
                     const newName = prompt('Edit item name:', itemName);
                     if (newName && newName.trim() !== '') {
-                        fetch('/room_raccoon/index.php?action=update&id=${id}', {
+                        fetch(`/room_raccoon/index.php?action=update&id=${id}`, {
                             method: 'POST',
-                            body: "name=${newName}&checked=${li.querySelector('.item-checkbox').checked}"
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `name=${newName}&checked=${li.querySelector('.item-checkbox').checked}`
                         }).then(() => location.reload());
                     }
                 } else if (target.classList.contains('item-checkbox')) {
-                    fetch('/room_raccoon/index.php?action=update&id=${id}', {
+                    fetch(`/room_raccoon/index.php?action=update&id=${id}`, {
                         method: 'POST',
-                        body: "name=${li.querySelector('.item-name').textContent}&checked=${target.checked}"
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `name=${li.querySelector('.item-name').textContent}&checked=${target.checked}`
                     });
                 }
             });

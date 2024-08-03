@@ -1,20 +1,19 @@
 <?php
 
 class Database {
-    /*
+    
     private $host = 'localhost';
     private $db_name = 'room_raccoon';
     private $username = 'root';
     private $password = '';
     public $conn;
-    */
-    
+    /*    
     private $host = 'sql112.infinityfree.com';
     private $db_name = 'if0_37025930_room_raccoon';
     private $username = 'if0_37025930';
     private $password = 'iT0A05p8p4';
     public $conn;
-    
+    */
     public function getConnection() {
         $this->conn = null;
 
